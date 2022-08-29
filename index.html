@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sugandeees 😱 </title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: linear-gradient(rgb(236, 146, 10), rgb(2, 221, 137));
+        }
+        .feed{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            
+        }
+        .container{
+            width: 500px;
+        }
+        .feed h1{
+            text-align: center;
+            font-size:30px;
+        }
+        .feed h3{
+            text-align: right;
+            padding-top: 50px;
+        }
+        .btn{
+            position: absolute;
+            top: 75%;
+            right: 10%;
+            width: 160px;
+            height: 60px;
+            border: none;
+            background: none;
+        }
+        .btn:hover{
+            animation: brdr 5s 1;
+            animation-fill-mode: forwards;
+        }
+        @keyframes brdr {
+            0%{
+                border: 2px rgba(0, 0, 0, 0.123) solid;
+                background: rgba(128, 128, 128, 0);
+            }
+            50%{
+                border: 2px rgba(0, 0, 0, 0.37) solid;
+                
+            }
+            100%{
+                border: 2px rgb(0, 0, 0) solid;
+                background: rgba(128, 128, 128, 0.568);
+            }
+        }
+        p{
+            font-size: 10px;
+            position: absolute;
+            top: 98%;
+        }
+    </style>
+</head>
+<body>
+    <div class="feed"></div>
+    <button class="btn" onclick=run()>Load More</button>
+    <p >powered by Storm Consultancy api_____&_____Alexthemaker</p>
+    <script>
+            //creating div and elements and adding it to the feed
+                const container = document.createElement("div")
+                const words = document.createElement("h1")
+                const person = document.createElement("h3")
+                container.classList.add("container")
+                
+                
+        function run(){
+            let xhr= new XMLHttpRequest()
+            xhr.open("GET","http://quotes.stormconsultancy.co.uk/random.json", true)
+            xhr.onload = function(){
+                
+                let quotes = JSON.parse(this.response)
+                //changes the innerHTML every time
+                words.innerHTML = quotes.quote
+                person.innerHTML= quotes.author
+                container.appendChild(words)
+                container.appendChild(person)
+                document.querySelector(".feed").appendChild(container)
+                
+            }
+            xhr.send()
+        }
+        run()
+    </script>
+</body>
+</html>
